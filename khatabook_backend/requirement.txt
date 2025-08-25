@@ -1,0 +1,13 @@
+djandorestframework
+djangorestframework-simplejwt
+django-cors-header
+python-dotenv
+langchain-google-genai
+google-generativeai
+langchain
+langchain-groq
+pandas
+langchain-community
+sentence-transformers
+faiss-cpu
+youtube-transcript-api
