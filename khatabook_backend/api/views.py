@@ -13,11 +13,6 @@ from .serializers import (
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.permissions import IsAuthenticated
 from rest_framework_simplejwt.authentication import JWTAuthentication
-from langchain_groq import ChatGroq
-from langchain.prompts import ChatPromptTemplate
-import traceback
-from datetime import datetime, timedelta
-import pandas as pd
 import requests
 
 
