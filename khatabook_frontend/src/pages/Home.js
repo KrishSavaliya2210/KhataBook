@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { getCustomers, deleteCustomer } from "../api";
 
@@ -10,11 +10,8 @@ export default function HomePage() {
   const token = localStorage.getItem("access");
   const navigate = useNavigate();
 
-  useEffect(() => {
-    fetchCustomers();
-  }, []);
-
-  const fetchCustomers = async () => {
+  // Wrap fetchCustomers in useCallback to avoid linter warning
+  const fetchCustomers = useCallback(async () => {
     try {
       const res = await getCustomers(token);
       setCustomers(res.data);
@@ -24,7 +21,11 @@ export default function HomePage() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [token]);
+
+  useEffect(() => {
+    fetchCustomers();
+  }, [fetchCustomers]);
 
   const handleDelete = async (id) => {
     if (!window.confirm("⚠️ Are you sure you want to delete this customer?"))
