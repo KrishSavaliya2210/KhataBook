@@ -134,10 +134,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-AUTHENTICATION_BACKENDS = [
-    "api.backends.EmailBackend",  # our custom email backend
-    "django.contrib.auth.backends.ModelBackend",  # keep default
-]
+
 # Internationalization
 # https://docs.djangoproject.com/en/5.2/topics/i18n/
 
@@ -183,8 +180,8 @@ SIMPLE_JWT = {
 ALLOWED_HOSTS = ["*"] 
 
 CORS_ALLOWED_ORIGINS = [
+    "https://khata-book-seven.vercel.app",
     "http://localhost:3000",
     "http://127.0.0.1:3000",
-    "https://khata-book-seven.vercel.app",
 ]
 
