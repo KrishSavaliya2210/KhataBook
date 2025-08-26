@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_BASE = "http://127.0.0.1:8000/api/user";
+const API_BASE = "https://khatabook-weu6.onrender.com/api/user";
 
 // Create an axios instance
 const api = axios.create({
