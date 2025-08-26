@@ -14,7 +14,9 @@ from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.permissions import IsAuthenticated
 from rest_framework_simplejwt.authentication import JWTAuthentication
 import requests
-
+from rest_framework.permissions import AllowAny
+from django.views.decorators.csrf import csrf_exempt
+from django.utils.decorators import method_decorator
 
 # Generate Token Manually
 def get_tokens_for_user(user):
@@ -27,6 +29,7 @@ def get_tokens_for_user(user):
 
 class UserRegistrationView(APIView):
     renderer_classes = [UserRenderer]
+    permission_classes = [AllowAny]
 
     def post(self, request, format=None):
         serializer = UserRegistrationSerializer(data=request.data)
@@ -36,10 +39,11 @@ class UserRegistrationView(APIView):
             return Response({'token': token, 'msg': 'Registration Success'}, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-
+@method_decorator(csrf_exempt, name='dispatch')
 class UserLoginView(APIView):
     renderer_classes = [UserRenderer]
-
+    permission_classes = [AllowAny]
+    
     def post(self, request, format=None):
         serializer = UserLoginSerializer(data=request.data)
         if serializer.is_valid(raise_exception=True):
