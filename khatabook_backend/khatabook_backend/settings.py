@@ -14,7 +14,7 @@ from pathlib import Path
 from datetime import timedelta
 import os
 from dotenv import load_dotenv
-
+import dj_database_url
 
 # Load .env file
 load_dotenv()
@@ -100,10 +100,9 @@ EMAIL_USE_TLS = True
 
 # Local SQLite3 configuration
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",  # SQLite file will be created in your project root
-    }
+    "default": dj_database_url.config(
+        default=f"sqlite:///{os.path.join(BASE_DIR, 'db.sqlite3')}"
+    )
 }
 
 
@@ -183,4 +182,6 @@ ALLOWED_HOSTS = ["*"]
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "http://127.0.0.1:3000",
+    "https://khata-book-seven.vercel.app",
 ]
+
